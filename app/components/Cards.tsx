@@ -2,10 +2,10 @@ import React from "react";
 import Card from "./Card";
 
 const categories = [
-  { title: "Dresses", imageSrc: "/images/The_girl.jpg" },
-  { title: "Tops", imageSrc: "/images/The_girl.jpg" },
-  { title: "Shoes", imageSrc: "/images/The_girl.jpg" },
-  { title: "Accessories", imageSrc: "/images/The_girl.jpg" },
+  { title: "Dresses", imageSrc: "/woman-3040029_1920.jpg" },
+  { title: "Tops", imageSrc: "/woman-3040029_1920.jpg" },
+  { title: "Shoes", imageSrc: "/woman-3040029_1920.jpg" },
+  { title: "Accessories", imageSrc: "/woman-3040029_1920.jpg" },
 ];
 
 const Cards: React.FC = () => {
@@ -14,7 +14,7 @@ const Cards: React.FC = () => {
       <h3 className="text-xl sm:text-3xl font-semibold text-gray-800 mb-6 ml-4">
         Categories
       </h3>
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 px-3 md:px-5 lg:grid-cols-4 gap-6 sm:gap-8">
         {categories.map((category) => (
           <Card
             key={category.title}
@@ -23,6 +23,7 @@ const Cards: React.FC = () => {
           />
         ))}
       </div>
+
       <hr className="mt-12 mb-6 border-gray-300" />
     </div>
   );

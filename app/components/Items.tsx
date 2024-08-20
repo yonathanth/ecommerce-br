@@ -4,25 +4,25 @@ import ItemCard from "./ItemCard";
 const items = [
   {
     title: "Summer Dress",
-    imageSrc: "/images/The_girl.jpg",
+    imageSrc: "/woman-3040029_1920.jpg",
     price: "$49.99",
     description: "A lightweight summer dress perfect for sunny days.",
   },
   {
     title: "Stylish Top",
-    imageSrc: "/images/The_girl.jpg",
+    imageSrc: "/woman-3040029_1920.jpg",
     price: "$29.99",
     description: "A trendy top that pairs well with jeans and skirts.",
   },
   {
     title: "Running Shoes",
-    imageSrc: "/images/The_girl.jpg",
+    imageSrc: "/woman-3040029_1920.jpg",
     price: "$89.99",
     description: "Comfortable and durable running shoes for everyday wear.",
   },
   {
     title: "Casual Jacket",
-    imageSrc: "/images/The_girl.jpg",
+    imageSrc: "/woman-3040029_1920.jpg",
     price: "$79.99",
     description: "A stylish jacket for casual outings.",
   },
@@ -33,12 +33,18 @@ interface CategoryProps {
 }
 const Items: React.FC<CategoryProps> = ({ category }) => {
   return (
-    <div className="container mx-auto py-4">
-      <div className="py-2 px-3">
-        <h3 className="text-lg sm:text-2xl font-semibold text-gray-800 ml-4 mb-6">
-          {category}
-        </h3>
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="pt-12 px-8">
+      <div className="px-4">
+        <div className="flex justify-between px-3">
+          <h3 className="text-2xl font-semibold text-gray-800 mb-8">
+            {category}
+          </h3>
+          <button className="text-2xl font-semibold text-gray-800 mb-8">
+            {" "}
+            See all
+          </button>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {items.map((item) => (
             <ItemCard
               key={item.title}

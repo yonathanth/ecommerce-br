@@ -1,12 +1,15 @@
 import Cards from "./components/Cards";
 import Hero from "./components/Hero";
 import Items from "./components/Items";
+import Shein from "./components/Shein";
 
 export default function Home() {
   return (
     <main>
-      <div>
-        <Hero />" <Cards />
+      <div className="mb-10">
+        <Hero />"
+        <Shein />
+        <Cards />
         <Items category="Tops" />
         <Items category="Tops" />
         <Items category="Tops" />
