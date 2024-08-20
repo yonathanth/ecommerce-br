@@ -27,7 +27,7 @@ const HeroSection = () => {
 
         {/* Text Content */}
         <div
-          className={`relative z-10 flex flex-col justify-center h-full px-6 md:px-20 text-center md:text-left items-center md:items-start ${poppins.className}`}
+          className={`relative z-10 md:mt-3 flex flex-col justify-center h-full px-6 md:px-20 text-center md:text-left items-center md:items-start ${poppins.className}`}
         >
           <div className="max-w-lg  pt-5">
             <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight lg:leading-snug animate-fadeInUp">

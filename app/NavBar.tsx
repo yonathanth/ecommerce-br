@@ -46,7 +46,7 @@ const NavBar = () => {
             {/* Logo */}
             <Link
               href="/"
-              className="text-[#572772] font-mono font-bold text-3xl mx-auto md:mx-0"
+              className="text-[#572772]  font-extrabold mt-2 text-3xl mx-auto md:mx-0"
             >
               Brikti's
             </Link>
