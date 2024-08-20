@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 
+// Import both Inter and Poppins fonts
 const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"], // Customize the weights you want to include
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +23,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      {/* Apply the Inter font globally and Poppins where needed */}
+      <body className={`${inter.className} ${poppins.className}`}>
         <NavBar />
         {children}
         <Footer />
