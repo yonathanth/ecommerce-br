@@ -31,9 +31,9 @@ const NavBar = () => {
     <>
       <nav className="bg-transparent absolute top-0 left-0 w-full z-30">
         <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-24">
+          <div className="flex flex-row justify-between items-center h-24">
             {/* Mobile Menu Button */}
-            <div className="sm:flex md:hidden flex items-center">
+            <div className="sm:flex md:hidden flex items-center mr-4">
               <button
                 className="text-gray-800 focus:outline-none"
                 onClick={toggleMenu}
@@ -44,13 +44,14 @@ const NavBar = () => {
             </div>
 
             {/* Logo */}
-            <Link
-              href="/"
-              className="text-[#572772]  font-extrabold mt-2 text-3xl mx-auto md:mx-0"
-            >
-              Brikti's
-            </Link>
-
+            <div>
+              <Link
+                href="/"
+                className="text-[#572772]  font-extrabold mt-2 text-3xl"
+              >
+                Brikti's
+              </Link>
+            </div>
             {/* Icons with Oval Shape */}
             <div className="relative hidden md:flex items-center justify-center space-x-12 md:ml-auto bg-[#EDE3FA]/90 p-2 rounded-full shadow-lg">
               <ul className="flex items-center space-x-8">
@@ -72,6 +73,7 @@ const NavBar = () => {
             </div>
 
             {/* Cart Button - Now Always Visible */}
+
             <button
               className="relative sm:ml-auto sm:mr-4 bg-[#572772] text-white p-2 rounded-full hover:bg-[#3E1F4B] transition duration-300"
               onClick={toggleCart}

@@ -6,7 +6,7 @@ import Shein from "./components/Shein";
 export default function Home() {
   return (
     <main>
-      <div className="mb-10">
+      <div className="mb-24">
         <Hero />"
         <Shein />
         <Cards />

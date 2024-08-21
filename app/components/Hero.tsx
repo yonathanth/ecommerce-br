@@ -17,8 +17,8 @@ const HeroSection = () => {
           <Image
             src="/a-small-shopping-cart-with-a-cellphone-inside-it.jpg"
             alt="Hero Image"
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
             priority
           />
           {/* Overlay */}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Footer from "./Footer";
+
 import NavBar from "./NavBar";
 
 // Import both Inter and Poppins fonts
