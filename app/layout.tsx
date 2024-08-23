@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import Footer from "./Footer";
-
-import NavBar from "./NavBar";
 
 // Import both Inter and Poppins fonts
 const inter = Inter({ subsets: ["latin"] });
@@ -26,9 +23,7 @@ export default function RootLayout({
     <html lang="en">
       {/* Apply the Inter font globally and Poppins where needed */}
       <body className={`${inter.className} ${poppins.className}`}>
-        <NavBar />
         {children}
-        <Footer />
       </body>
     </html>
   );

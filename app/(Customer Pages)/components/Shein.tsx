@@ -42,7 +42,7 @@ const ProductInquirySection: React.FC = () => {
             className="bg-pink-500 text-white py-3 px-6 rounded-lg hover:bg-pink-600 transition duration-200"
             onClick={() => alert("Link submitted!")}
           >
-            Submit
+            Add to Cart
           </button>
           <button
             className="bg-gray-500 text-white py-3 px-6 rounded-lg hover:bg-gray-600 transition duration-200"

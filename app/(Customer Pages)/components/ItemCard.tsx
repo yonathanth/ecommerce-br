@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { HiOutlineShoppingCart } from "react-icons/hi2";
 
 interface ItemCardProps {
   title: string;

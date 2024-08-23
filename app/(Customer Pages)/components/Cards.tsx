@@ -14,7 +14,7 @@ const Cards: React.FC = () => {
       <h3 className="text-xl sm:text-3xl font-semibold text-gray-800 mb-6 ml-4">
         Categories
       </h3>
-      <div className="grid grid-cols-2 md:grid-cols-4 px-3 md:px-5 lg:grid-cols-4 gap-6 sm:gap-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 px-3 md:px-5  gap-6 sm:gap-8">
         {categories.map((category) => (
           <Card
             key={category.title}
