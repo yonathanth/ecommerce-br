@@ -1,109 +1,27 @@
-// components/AdminNavbar.js
-
 "use client";
+
+import { cn } from "@/lib/utils";
 import Link from "next/link";
-import React, { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { usePathname } from "next/navigation";
+import { ComponentProps, ReactNode } from "react";
 
-export default function AdminNav() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
+export function Nav({ children }: { children: ReactNode }) {
   return (
-    <>
-      <nav className="bg-gray-800 p-4">
-        <div className="container mx-auto flex justify-between items-center">
-          {/* Admin Dashboard Logo */}
-          <div className="text-white text-2xl font-bold">
-            <Link href="/admin">Admin Dashboard</Link>
-          </div>
+    <nav className="bg-primary text-primary-foreground flex justify-center px-4">
+      {children}
+    </nav>
+  );
+}
 
-          {/* Mobile Menu Button */}
-          <div className="sm:flex md:hidden flex items-center">
-            <button
-              className="text-white focus:outline-none"
-              onClick={toggleMenu}
-              aria-label="Toggle Menu"
-            >
-              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-            </button>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/admin/products"
-              className="text-white hover:text-gray-300"
-            >
-              Products
-            </Link>
-            <Link
-              href="/admin/orders"
-              className="text-white hover:text-gray-300"
-            >
-              Orders
-            </Link>
-            <Link
-              href="/admin/users"
-              className="text-white hover:text-gray-300"
-            >
-              Users
-            </Link>
-            <Link href="/logout" className="text-white hover:text-gray-300">
-              Logout
-            </Link>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <div
-          className={`md:hidden bg-gray-800 transition-all duration-500 ease-in-out transform ${
-            isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-          } overflow-hidden`}
-        >
-          <ul className="flex flex-col space-y-4 p-4">
-            <li>
-              <Link
-                href="/admin/products"
-                className="text-white hover:text-gray-300"
-                onClick={() => setIsOpen(false)}
-              >
-                Products
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/admin/orders"
-                className="text-white hover:text-gray-300"
-                onClick={() => setIsOpen(false)}
-              >
-                Orders
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/admin/users"
-                className="text-white hover:text-gray-300"
-                onClick={() => setIsOpen(false)}
-              >
-                Users
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/logout"
-                className="text-white hover:text-gray-300"
-                onClick={() => setIsOpen(false)}
-              >
-                Logout
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </>
+export function NavLink(props: Omit<ComponentProps<typeof Link>, "className">) {
+  const pathname = usePathname();
+  return (
+    <Link
+      {...props}
+      className={cn(
+        "p-4 hover:bg-secondary hover:text-secondary-foreground focus-visible:bg-secondary focus-visible:text-secondary-foreground",
+        pathname === props.href && "bg-background text-foreground"
+      )}
+    />
   );
 }

@@ -32,7 +32,11 @@ const Footer = () => {
       </div>
 
       {/* Footer Bottom */}
+
       <div className="border-t border-gray-700 mt-6 pt-4 text-center text-sm">
+        <p className=" mb-3    text-center text-sm">
+          Developed by ShalOps Digital Solutions PLC.
+        </p>
         &copy; {new Date().getFullYear()} Brikti's. All rights reserved.
       </div>
     </footer>

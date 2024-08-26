@@ -12,3 +12,42 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Product {
+  id                     String                 @id @default(uuid())
+  name                   String
+  isAvailableForPurchase Boolean @default(true)
+  priceInCents           Float                  // Price represented as a decimal value
+  imagePath              String
+  description            String
+  size                   String?                 // Specifies product size (e.g., S, M, L, etc.)
+  color                  String?                 // Specifies product color
+  material               String?                // Specifies the fabric/material of the clothing            
+  stockQuantity          Int?                    // Tracks inventory for each product
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime               @updatedAt
+  orders                 Order[]
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  phonenNumber String
+  firstName String
+  lastName  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orders    Order[]
+}
+
+model Order {
+  id               String   @id @default(uuid())
+  pricePaidInCents        Float                  // Price represented as a decimal value
+  shippingAddress  String                 // Handles delivery of physical products
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  userId           String
+  productId        String
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product          Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+}
