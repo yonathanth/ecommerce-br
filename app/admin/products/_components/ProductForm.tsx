@@ -51,6 +51,28 @@ export function ProductForm({ product }: { product?: Product | null }) {
         )}
       </div>
       <div className="space-y-2">
+        <Label htmlFor="size">Available Sizes</Label>
+        <Input
+          type="text"
+          id="size"
+          name="size"
+          required
+          defaultValue={product?.size || ""}
+        />
+        {error.size && <div className="text-destructive">{error.name}</div>}
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="color">Available Colors</Label>
+        <Input
+          type="text"
+          id="color"
+          name="color"
+          required
+          defaultValue={product?.color || ""}
+        />
+        {error.color && <div className="text-destructive">{error.name}</div>}
+      </div>
+      <div className="space-y-2">
         <Label htmlFor="description">Description</Label>
         <Textarea
           id="description"

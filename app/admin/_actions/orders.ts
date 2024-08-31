@@ -12,3 +12,12 @@ export async function deleteOrder(id: string) {
 
   return order;
 }
+export async function deleteSheinOrder(id: string) {
+  const order = await prisma.sheinOrder.delete({
+    where: { id },
+  });
+
+  if (order == null) return notFound();
+
+  return order;
+}

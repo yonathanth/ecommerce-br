@@ -2,10 +2,10 @@
 
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { useTransition } from "react";
-import { deleteOrder } from "../../_actions/orders";
+import { deleteOrder, deleteSheinOrder } from "../../_actions/orders";
 import { useRouter } from "next/navigation";
 
-export function DeleteDropDownItem({ id }: { id: string }) {
+export function DeleteDropDownItem({ id, type }: { id: string; type: string }) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -15,7 +15,11 @@ export function DeleteDropDownItem({ id }: { id: string }) {
       disabled={isPending}
       onClick={() =>
         startTransition(async () => {
-          await deleteOrder(id);
+          {
+            type === "normal"
+              ? await deleteOrder(id)
+              : await deleteSheinOrder(id);
+          }
           router.refresh();
         })
       }

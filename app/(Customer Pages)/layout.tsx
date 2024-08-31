@@ -1,3 +1,4 @@
+import { CartProvider } from "./components/cartContext";
 import Footer from "./Footer";
 
 import NavBar from "./NavBar";
@@ -10,11 +11,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* Apply the Inter font globally and Poppins where needed */}
-      <body>
-        <NavBar />
-        {children}
-        <Footer />
-      </body>
+      <CartProvider>
+        <body>
+          <NavBar />
+          {children}
+          <Footer />
+        </body>
+      </CartProvider>
     </html>
   );
 }

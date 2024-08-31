@@ -5,11 +5,13 @@ import { FaBars, FaTimes, FaHome, FaStore, FaUser } from "react-icons/fa"; // Im
 import { FaShoppingCart } from "react-icons/fa"; // Cart Icon
 import { usePathname } from "next/navigation";
 import CartModal from "./components/CartModal";
+import { useCart } from "./components/cartContext"; // Import useCart
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const [isCartOpen, setIsCartOpen] = useState(false); // Cart state
+  const { cartItems } = useCart(); // Get cart items from context
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -21,10 +23,16 @@ const NavBar = () => {
 
   const isActive = (href: string) => pathname === href;
 
+  // Calculate total number of items in the cart
+  const totalItems = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   const links = [
-    { label: <FaHome size={24} />, href: "/" },
-    { label: <FaStore size={24} />, href: "/shop" },
-    { label: <FaUser size={24} />, href: "/login" },
+    { name: "Home", label: <FaHome size={24} />, href: "/" },
+    { name: "Shop", label: <FaStore size={24} />, href: "/shop" },
+    { name: "Login/Signup", label: <FaUser size={24} />, href: "/login" },
   ];
 
   return (
@@ -47,7 +55,7 @@ const NavBar = () => {
             <div>
               <Link
                 href="/"
-                className="text-[#572772]  font-extrabold mt-2 text-3xl"
+                className="text-[#572772] font-extrabold mt-2 text-3xl"
               >
                 Brikti's
               </Link>
@@ -80,9 +88,11 @@ const NavBar = () => {
               aria-label="Toggle Cart"
             >
               <FaShoppingCart size={24} />
-              <span className="absolute top-0 right-0 text-xs bg-red-500 text-white rounded-full h-5 w-5 flex items-center justify-center">
-                2
-              </span>
+              {totalItems > 0 && (
+                <span className="absolute top-0 right-0 text-xs bg-red-500 text-white rounded-full h-5 w-5 flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
             </button>
           </div>
         </div>
@@ -97,7 +107,7 @@ const NavBar = () => {
         >
           <ul className="flex flex-col space-y-4 p-4">
             {links.map((link) => (
-              <li key={link.href}>
+              <li className="font-semibold" key={link.href}>
                 <Link
                   href={link.href}
                   className={
@@ -105,7 +115,7 @@ const NavBar = () => {
                   }
                   onClick={() => setIsOpen(false)}
                 >
-                  {link.label}
+                  {link.name}
                 </Link>
               </li>
             ))}

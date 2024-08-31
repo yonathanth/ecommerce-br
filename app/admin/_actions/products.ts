@@ -13,6 +13,8 @@ const imageSchema = fileSchema.refine(
 
 const addSchema = z.object({
   name: z.string().min(1),
+  size: z.string().min(1),
+  color: z.string().min(1),
   description: z.string().min(1),
   priceInCents: z.coerce.number().int().min(1),
   image: imageSchema.refine((file) => file.size > 0, "Required"),
@@ -39,6 +41,8 @@ export async function addProduct(prevState: unknown, formData: FormData) {
       name: data.name,
       description: data.description,
       priceInCents: data.priceInCents,
+      size: data.size,
+      color: data.color,
       imagePath,
     },
   });
@@ -82,6 +86,8 @@ export async function updateProduct(
     where: { id },
     data: {
       name: data.name,
+      size: data.size,
+      color: data.color,
       description: data.description,
       priceInCents: data.priceInCents,
       imagePath,

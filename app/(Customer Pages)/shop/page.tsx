@@ -8,9 +8,9 @@ const shop = () => {
       <Shein />
 
       <Items category="Tops" />
-      <Items category="Tops" />
-      <Items category="Tops" />
-      <Items category="Tops" />
+      <Items category="Dresses" />
+      <Items category="Shoes" />
+      <Items category="Accessories" />
     </div>
   );
 };

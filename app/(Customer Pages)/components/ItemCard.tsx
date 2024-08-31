@@ -1,27 +1,47 @@
 "use client";
 import React, { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
+import { useCart } from "./cartContext"; // import your context
 
 interface ItemCardProps {
+  id: number;
   title: string;
   imageSrc: string;
-  price: string;
+  price: number;
   description: string;
+  availableSizes: string;
+  availableColors: string;
 }
 
 const ItemCard: React.FC<ItemCardProps> = ({
+  id,
   title,
   imageSrc,
   price,
   description,
+  availableSizes = [],
+  availableColors = [],
 }) => {
   const [quantity, setQuantity] = useState(1);
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // Manage Dialog open state
+  const { addToCart } = useCart(); // get addToCart from context
 
   const increaseQuantity = () => setQuantity(quantity + 1);
   const decreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
+  };
+
+  const handleAddToCart = () => {
+    addToCart({
+      id,
+      name: title,
+      price,
+      quantity,
+      image: imageSrc,
+    });
+    setIsDialogOpen(false); // Close the Dialog after adding to cart
   };
 
   return (
@@ -37,15 +57,18 @@ const ItemCard: React.FC<ItemCardProps> = ({
       <p className="text-gray-800 mb-4 text-center font-semibold">{price}</p>
 
       <div className="flex justify-center">
-        <Dialog.Root>
+        <Dialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <Dialog.Trigger asChild>
-            <button className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-900 transition duration-200">
+            <button
+              onClick={() => setIsDialogOpen(true)} // Open the Dialog
+              className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-900 transition duration-200"
+            >
               Add to Cart
             </button>
           </Dialog.Trigger>
           <Dialog.Portal>
             <Dialog.Overlay className="fixed inset-0 bg-black opacity-40" />
-            <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+            <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-xl w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-4 sm:mx-8">
               <Dialog.Title className="text-2xl font-semibold mb-4 text-center">
                 {title}
               </Dialog.Title>
@@ -58,6 +81,23 @@ const ItemCard: React.FC<ItemCardProps> = ({
               <p className="text-gray-900 font-semibold mb-4 text-center">
                 {price}
               </p>
+
+              <div className="text-center mb-4">
+                <p className="text-gray-700 mb-2">
+                  <strong>Available Sizes:</strong>{" "}
+                  {availableSizes.length > 0 ? availableSizes : "Not available"}
+                </p>
+                <p className="text-gray-700 mb-4">
+                  <strong>Available Colors:</strong>{" "}
+                  {availableColors.length > 0
+                    ? availableColors
+                    : "Not available"}
+                </p>
+                <p className="text-gray-500 text-sm">
+                  You will receive a call to confirm your preferred size and
+                  color.
+                </p>
+              </div>
 
               <div className="flex items-center justify-center mb-4">
                 <button
@@ -76,7 +116,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
               </div>
 
               <button
-                onClick={() => alert(`Added ${quantity} ${title}(s) to cart!`)}
+                onClick={handleAddToCart}
                 className="bg-pink-500 text-white py-2 px-4 rounded-lg w-full hover:bg-pink-600 transition duration-200"
               >
                 Confirm

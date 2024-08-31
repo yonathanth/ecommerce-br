@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation"; // Import useRouter
 import { Poppins } from "next/font/google";
 
 // Import Poppins font
@@ -9,6 +10,12 @@ const poppins = Poppins({
 });
 
 const HeroSection = () => {
+  const router = useRouter(); // Initialize useRouter
+
+  const handleShopNow = () => {
+    router.push("/shop"); // Navigate to the /shop route
+  };
+
   return (
     <section>
       <div className="relative h-[100vh] overflow-hidden">
@@ -36,7 +43,10 @@ const HeroSection = () => {
             <p className="mt-4 text-lg lg:text-2xl text-blue-900 animate-fadeInUp delay-150">
               Explore a World Full of Fashion
             </p>
-            <button className="mt-8 inline-block bg-[#EDE3FA] text-black font-medium py-3 px-8 rounded-full shadow-lg hover:bg-red-400 transition duration-300 ease-in-out animate-fadeInUp delay-300">
+            <button
+              className="mt-8 inline-block bg-[#EDE3FA] text-black font-medium py-3 px-8 rounded-full shadow-lg hover:bg-red-400 transition duration-300 ease-in-out animate-fadeInUp delay-300"
+              onClick={handleShopNow} // Add onClick event to handle navigation
+            >
               Shop now
             </button>
           </div>

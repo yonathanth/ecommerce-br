@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreVertical } from "lucide-react";
 import { DeleteDropDownItem } from "./_components/OrderActions";
+import { promise } from "zod";
 
 function getOrders() {
   return prisma.order.findMany({
@@ -25,6 +26,18 @@ function getOrders() {
       pricePaidInCents: true,
       product: { select: { name: true } },
       user: { select: { email: true } },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+}
+
+function getSheinOrders() {
+  return prisma.sheinOrder.findMany({
+    select: {
+      id: true,
+      url: true,
+      pricePaidInCents: true,
+      user: { select: { email: true, phonenNumber: true } },
     },
     orderBy: { createdAt: "desc" },
   });
@@ -40,44 +53,85 @@ export default function OrdersPage() {
 }
 
 async function OrdersTable() {
-  const orders = await getOrders();
+  const [orders, sheinOrders] = await Promise.all([
+    getOrders(),
+    getSheinOrders(),
+  ]);
 
-  if (orders.length === 0) return <p>No sales found</p>;
+  if (orders.length === 0 && sheinOrders.length === 0)
+    return <p>No sales found</p>;
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Product</TableHead>
-          <TableHead>Customer</TableHead>
-          <TableHead>Price Paid</TableHead>
-          <TableHead className="w-0">
-            <span className="sr-only">Actions</span>
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {orders.map((order) => (
-          <TableRow key={order.id}>
-            <TableCell>{order.product.name}</TableCell>
-            <TableCell>{order.user.email}</TableCell>
-            <TableCell>
-              {formatCurrency(order.pricePaidInCents / 100)}
-            </TableCell>
-            <TableCell className="text-center">
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <MoreVertical />
-                  <span className="sr-only">Actions</span>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DeleteDropDownItem id={order.id} />
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </TableCell>
+    <>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Product</TableHead>
+            <TableHead>Customer</TableHead>
+            <TableHead>Price Paid</TableHead>
+            <TableHead className="w-0">
+              <span className="sr-only">Actions</span>
+            </TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {orders.map((order) => (
+            <TableRow key={order.id}>
+              <TableCell>{order.product.name}</TableCell>
+              <TableCell>{order.user.email}</TableCell>
+              <TableCell>
+                {formatCurrency(order.pricePaidInCents / 100)}
+              </TableCell>
+              <TableCell className="text-center">
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <MoreVertical />
+                    <span className="sr-only">Actions</span>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DeleteDropDownItem id={order.id} type={"normal"} />
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+
+      <Table className="mt-8">
+        <TableHeader>
+          <TableRow>
+            <TableHead>SheinLink</TableHead>
+            <TableHead>Customer</TableHead>
+            <TableHead>Price Paid</TableHead>
+            <TableHead className="w-0">
+              <span className="sr-only">Actions</span>
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {sheinOrders.map((order) => (
+            <TableRow key={order.id}>
+              <TableCell>{order.url}</TableCell>
+              <TableCell>{order.user.phonenNumber}</TableCell>
+              <TableCell>
+                {formatCurrency(order.pricePaidInCents / 100)}
+              </TableCell>
+              <TableCell className="text-center">
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <MoreVertical />
+                    <span className="sr-only">Actions</span>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DeleteDropDownItem id={order.id} type={"shein"} />
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </>
   );
 }

@@ -10,7 +10,7 @@ const categories = [
 
 const Cards: React.FC = () => {
   return (
-    <div className="pt-12 px-8">
+    <div className="pt-12 px-8" id="products-section">
       <h3 className="text-xl sm:text-3xl font-semibold text-gray-800 mb-6 ml-4">
         Categories
       </h3>
