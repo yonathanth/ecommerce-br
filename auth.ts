@@ -1,13 +1,9 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import prisma from "./prisma/client";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
-interface Credentials {
-  email: string;
-  password: string;
-}
-export const authOptions = {
+export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
       credentials: {
@@ -15,8 +11,6 @@ export const authOptions = {
         password: {},
       },
       authorize: async (credentials) => {
-        let user = null;
-
         if (!credentials?.email || !credentials.password) return null;
 
         const { email, password } = credentials as {
@@ -35,10 +29,24 @@ export const authOptions = {
           currentUser.hashedPassword
         );
 
-        return passwordMatch ? user : null;
+        return passwordMatch ? currentUser : null;
       },
     }),
   ],
-};
-
-export const { handlers, signIn, signOut, auth } = NextAuth(authOptions);
+  callbacks: {
+    jwt({ token, user }) {
+      if (user) {
+        // User is available during sign-in
+        token.id = user.id;
+      }
+      return token;
+    },
+    session({ session, token }) {
+      session.user.id = token.id as string;
+      return session;
+    },
+  },
+  pages: {
+    signIn: "/signin",
+  },
+});

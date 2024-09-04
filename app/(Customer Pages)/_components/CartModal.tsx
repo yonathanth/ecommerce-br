@@ -1,5 +1,6 @@
 import React from "react";
 import { useCart } from "./cartContext";
+import Link from "next/link";
 
 interface CartProps {
   isOpen: boolean;
@@ -106,9 +107,11 @@ const CartModal = ({ isOpen, toggleCart }: CartProps) => {
                 >
                   Clear Cart
                 </button>
-                <button className="mt-4 w-full bg-black text-white py-3 rounded-lg shadow-lg hover:bg-gray-800 transition-all duration-300 ease-in-out">
-                  Proceed to Checkout
-                </button>
+                <Link href="./shop/checkout">
+                  <button className="mt-4 w-full bg-black text-white py-3 rounded-lg shadow-lg hover:bg-gray-800 transition-all duration-300 ease-in-out">
+                    Proceed to Checkout
+                  </button>
+                </Link>
               </div>
             </>
           )}

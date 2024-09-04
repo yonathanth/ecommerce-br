@@ -21,8 +21,12 @@ function getUsers() {
   return prisma.user.findMany({
     select: {
       id: true,
+      firstName: true,
+      lastName: true,
       email: true,
+      phoneNumber: true,
       orders: { select: { pricePaidInCents: true } },
+      sheinOrders: { select: { pricePaidInCents: true } },
     },
     orderBy: { createdAt: "desc" },
   });
@@ -46,9 +50,13 @@ async function UsersTable() {
     <Table>
       <TableHeader>
         <TableRow>
+          <TableHead>Name</TableHead>
+          <TableHead>Phone Number</TableHead>
           <TableHead>Email</TableHead>
           <TableHead>Orders</TableHead>
+          <TableHead>Shein Orders</TableHead>
           <TableHead>Value</TableHead>
+
           <TableHead className="w-0">
             <span className="sr-only">Actions</span>
           </TableHead>
@@ -57,14 +65,25 @@ async function UsersTable() {
       <TableBody>
         {users.map((user) => (
           <TableRow key={user.id}>
+            <TableCell>{`${user.firstName} ${user.lastName}`}</TableCell>
+            <TableCell>{user.phoneNumber}</TableCell>
             <TableCell>{user.email}</TableCell>
+
             <TableCell>{formatNumber(user.orders.length)}</TableCell>
+            <TableCell>{formatNumber(user.sheinOrders.length)}</TableCell>
+
             <TableCell>
               {formatCurrency(
                 user.orders.reduce((sum, o) => o.pricePaidInCents + sum, 0) /
-                  100
+                  100 +
+                  user.sheinOrders.reduce(
+                    (sum, o) => o.pricePaidInCents + sum,
+                    0
+                  ) /
+                    100
               )}
             </TableCell>
+
             <TableCell className="text-center">
               <DropdownMenu>
                 <DropdownMenuTrigger>

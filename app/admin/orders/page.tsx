@@ -17,15 +17,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreVertical } from "lucide-react";
 import { DeleteDropDownItem } from "./_components/OrderActions";
-import { promise } from "zod";
 
 function getOrders() {
   return prisma.order.findMany({
     select: {
       id: true,
       pricePaidInCents: true,
+      shippingAddress: true,
       product: { select: { name: true } },
-      user: { select: { email: true } },
+      user: { select: { phoneNumber: true, firstName: true, lastName: true } },
     },
     orderBy: { createdAt: "desc" },
   });
@@ -37,7 +37,8 @@ function getSheinOrders() {
       id: true,
       url: true,
       pricePaidInCents: true,
-      user: { select: { email: true, phonenNumber: true } },
+      shippingAddress: true,
+      user: { select: { phoneNumber: true, firstName: true, lastName: true } },
     },
     orderBy: { createdAt: "desc" },
   });
@@ -63,12 +64,17 @@ async function OrdersTable() {
 
   return (
     <>
+      <h2 className="font-extrabold text-xl my-8">Orders</h2>
+
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead>Product</TableHead>
             <TableHead>Customer</TableHead>
+            <TableHead>Phone</TableHead>
             <TableHead>Price Paid</TableHead>
+            <TableHead>Shipping Address</TableHead>
+
             <TableHead className="w-0">
               <span className="sr-only">Actions</span>
             </TableHead>
@@ -78,10 +84,14 @@ async function OrdersTable() {
           {orders.map((order) => (
             <TableRow key={order.id}>
               <TableCell>{order.product.name}</TableCell>
-              <TableCell>{order.user.email}</TableCell>
+              <TableCell>{`${order.user.firstName} ${order.user.lastName}`}</TableCell>
+              <TableCell>{order.user.phoneNumber}</TableCell>
+
               <TableCell>
                 {formatCurrency(order.pricePaidInCents / 100)}
               </TableCell>
+              <TableCell>{order.shippingAddress}</TableCell>
+
               <TableCell className="text-center">
                 <DropdownMenu>
                   <DropdownMenuTrigger>
@@ -98,12 +108,17 @@ async function OrdersTable() {
         </TableBody>
       </Table>
 
+      <hr className="my-20" />
+      <h2 className="font-extrabold text-xl">Shein Order</h2>
       <Table className="mt-8">
         <TableHeader>
           <TableRow>
             <TableHead>SheinLink</TableHead>
             <TableHead>Customer</TableHead>
+            <TableHead>phone</TableHead>
             <TableHead>Price Paid</TableHead>
+            <TableHead>Shipping Address</TableHead>
+
             <TableHead className="w-0">
               <span className="sr-only">Actions</span>
             </TableHead>
@@ -112,11 +127,25 @@ async function OrdersTable() {
         <TableBody>
           {sheinOrders.map((order) => (
             <TableRow key={order.id}>
-              <TableCell>{order.url}</TableCell>
-              <TableCell>{order.user.phonenNumber}</TableCell>
+              <TableCell>
+                {
+                  <a
+                    href={order.url}
+                    target="_blank"
+                    className="text-blue-500 font-bold"
+                  >
+                    Link
+                  </a>
+                }
+              </TableCell>
+              <TableCell>{`${order.user.firstName} ${order.user.lastName}`}</TableCell>
+
+              <TableCell>{order.user.phoneNumber}</TableCell>
               <TableCell>
                 {formatCurrency(order.pricePaidInCents / 100)}
               </TableCell>
+              <TableCell>{order.shippingAddress}</TableCell>
+
               <TableCell className="text-center">
                 <DropdownMenu>
                   <DropdownMenuTrigger>

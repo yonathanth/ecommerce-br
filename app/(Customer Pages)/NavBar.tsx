@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { FaBars, FaTimes, FaHome, FaStore, FaUser } from "react-icons/fa"; // Importing icons
 import { FaShoppingCart } from "react-icons/fa"; // Cart Icon
 import { usePathname } from "next/navigation";
-import CartModal from "./components/CartModal";
-import { useCart } from "./components/cartContext"; // Import useCart
+import CartModal from "./_components/CartModal";
+import { useCart } from "./_components/cartContext"; // Import useCart
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +32,7 @@ const NavBar = () => {
   const links = [
     { name: "Home", label: <FaHome size={24} />, href: "/" },
     { name: "Shop", label: <FaStore size={24} />, href: "/shop" },
-    { name: "Login/Signup", label: <FaUser size={24} />, href: "/login" },
+    { name: "Login/Signup", label: <FaUser size={24} />, href: "/signin" },
   ];
 
   return (
@@ -83,7 +83,7 @@ const NavBar = () => {
             {/* Cart Button - Now Always Visible */}
 
             <button
-              className="relative sm:ml-auto sm:mr-4 bg-[#572772] text-white p-2 rounded-full hover:bg-[#3E1F4B] transition duration-300"
+              className=" relative sm:ml-auto sm:mr-4 bg-[#572772] text-white p-2 rounded-full hover:bg-[#3E1F4B] transition duration-300"
               onClick={toggleCart}
               aria-label="Toggle Cart"
             >

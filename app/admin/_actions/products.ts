@@ -13,6 +13,7 @@ const imageSchema = fileSchema.refine(
 
 const addSchema = z.object({
   name: z.string().min(1),
+  category: z.string().min(1),
   size: z.string().min(1),
   color: z.string().min(1),
   description: z.string().min(1),
@@ -39,6 +40,7 @@ export async function addProduct(prevState: unknown, formData: FormData) {
     data: {
       isAvailableForPurchase: false,
       name: data.name,
+      category: data.category,
       description: data.description,
       priceInCents: data.priceInCents,
       size: data.size,
@@ -86,6 +88,7 @@ export async function updateProduct(
     where: { id },
     data: {
       name: data.name,
+      category: data.category,
       size: data.size,
       color: data.color,
       description: data.description,

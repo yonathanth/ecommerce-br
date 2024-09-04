@@ -1,7 +1,5 @@
-import { CartProvider } from "./components/cartContext";
-import Footer from "./Footer";
-
-import NavBar from "./NavBar";
+import AuthProvider from "./(auth)/register/Provider";
+import { CartProvider } from "./_components/cartContext";
 
 export default function RootLayout({
   children,
@@ -11,13 +9,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* Apply the Inter font globally and Poppins where needed */}
-      <CartProvider>
-        <body>
-          <NavBar />
-          {children}
-          <Footer />
-        </body>
-      </CartProvider>
+
+      <body>
+        <AuthProvider>
+          <CartProvider>{children}</CartProvider>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

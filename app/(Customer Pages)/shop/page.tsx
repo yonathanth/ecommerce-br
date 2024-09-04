@@ -1,17 +1,23 @@
 import React from "react";
-import Shein from "../components/Shein";
-import Items from "../components/Items";
+import Shein from "../_components/Shein";
+import Items from "../_components/Items";
+import NavBar from "../NavBar";
+import Footer from "../Footer";
 
 const shop = () => {
   return (
-    <div className="py-32">
-      <Shein />
+    <>
+      <NavBar />
+      <div className="py-32">
+        <Shein />
 
-      <Items category="Tops" />
-      <Items category="Dresses" />
-      <Items category="Shoes" />
-      <Items category="Accessories" />
-    </div>
+        <Items category="Tops" />
+        <Items category="Dresses" />
+        <Items category="Shoes" />
+        <Items category="Accessories" />
+      </div>
+      <Footer />
+    </>
   );
 };
 

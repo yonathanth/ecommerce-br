@@ -4,7 +4,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { useCart } from "./cartContext"; // import your context
 
 interface ItemCardProps {
-  id: number;
+  id: string;
   title: string;
   imageSrc: string;
   price: number;
@@ -54,7 +54,10 @@ const ItemCard: React.FC<ItemCardProps> = ({
       <h3 className="text-xl font-semibold text-gray-900 mb-2 text-center">
         {title}
       </h3>
-      <p className="text-gray-800 mb-4 text-center font-semibold">{price}</p>
+      <p className="text-gray-800 mb-4 text-center font-semibold">
+        {" "}
+        {`etb ${price}`}
+      </p>
 
       <div className="flex justify-center">
         <Dialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -79,7 +82,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
               />
               <p className="text-gray-700 mb-4 text-center">{description}</p>
               <p className="text-gray-900 font-semibold mb-4 text-center">
-                {price}
+                {`etb ${price}`}
               </p>
 
               <div className="text-center mb-4">

@@ -34,6 +34,7 @@ model Product {
   description            String
   size                   String // Specifies product size (e.g., S, M, L, etc.)
   color                  String // Specifies product color             // Specifies the fabric/material of the clothing                               // Tracks inventory for each product
+  category               String
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
   orders                 Order[]
@@ -42,7 +43,7 @@ model Product {
 model User {
   id           String   @id @default(uuid())
   email        String   @unique
-  phonenNumber String
+  phoneNumber String
   firstName    String
   lastName     String
   hashedPassword String
