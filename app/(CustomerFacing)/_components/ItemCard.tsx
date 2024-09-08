@@ -6,6 +6,7 @@ import { formatCurrency } from "@/lib/formatters"; // import formatCurrency
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+
 interface ItemCardProps {
   id: string;
   title: string;
@@ -71,14 +72,11 @@ const ItemCard: React.FC<ItemCardProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center bg-white border-purple-200  shadow-lg pb-6 transition-transform transform hover:scale-105 hover:shadow-xl hover:border-purple-700 duration-300 ease-in-out">
-      <Image
-        src={imageSrc}
-        layout="fill"
-        objectFit="cover"
-        alt={title}
-        className="h-48 w-full object-cover mb-4"
-      />
+    <div className="flex flex-col items-center bg-white border-purple-200 shadow-lg pb-6 transition-transform transform hover:scale-105 hover:shadow-xl hover:border-purple-700 duration-300 ease-in-out">
+      {/* Fixed parent container for the image */}
+      <div className="relative w-full h-48">
+        <Image src={imageSrc} fill alt={title} className="object-cover mb-4" />
+      </div>
       <h3 className="text-xl font-mono font-semibold text-gray-700 mb-2 text-center">
         {title}
       </h3>
@@ -102,11 +100,15 @@ const ItemCard: React.FC<ItemCardProps> = ({
               <Dialog.Title className="text-2xl font-bold mb-4 text-center text-purple-900">
                 {title}
               </Dialog.Title>
-              <Image
-                src={imageSrc}
-                alt={title}
-                className="h-40 w-full object-cover rounded-lg mb-4"
-              />
+              {/* Fixed parent container for the Dialog image */}
+              <div className="relative w-full h-40 mb-4">
+                <Image
+                  src={imageSrc}
+                  fill
+                  alt={title}
+                  className="object-cover rounded-lg"
+                />
+              </div>
               <p className="text-gray-700 mb-4 text-center">{description}</p>
               <p className="text-purple-700 font-semibold mb-4 text-center">
                 {formatCurrency(price)}

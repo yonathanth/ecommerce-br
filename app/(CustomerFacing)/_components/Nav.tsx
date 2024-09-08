@@ -71,10 +71,10 @@ const Nav: React.FC = () => {
         }`}
       >
         <Link href="/" className="text-3xl font-bold logo-hover">
-          Brikti&apos;s
+          Brukti&apos;s
         </Link>
         <div className="flex items-center mr-16">
-          <div className="hidden md:flex space gap-8 ml-10 text-2xl pr-8 ">
+          <div className="hidden md:flex space gap-14 ml-10 text-2xl pr-8 ">
             <NavLink href="/">Home</NavLink>
             <NavLink href="/shop">Shop</NavLink>
             <NavLink href="/auth/account">Sign In</NavLink>

@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 interface CartItem {
   id: string;
@@ -16,7 +16,7 @@ interface CartContextType {
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: string) => void;
   clearCart: () => void;
-  setCartItems: (items: CartItem[]) => void; // Add this function to the context
+  setCartItems: (items: CartItem[]) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -33,6 +33,23 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isInitialLoad, setIsInitialLoad] = useState(true); // Track initial load
+
+  // Load cart items from local storage when the component mounts
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem("cartItems");
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
+    }
+    setIsInitialLoad(false); // Mark the initial load as complete
+  }, []);
+
+  // Save cart items to local storage whenever they change, but skip the initial load
+  useEffect(() => {
+    if (!isInitialLoad) {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }
+  }, [cartItems, isInitialLoad]);
 
   const addToCart = (item: CartItem) => {
     setCartItems((prevItems) => {

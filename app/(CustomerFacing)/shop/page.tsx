@@ -3,6 +3,7 @@ import Shein from "../_components/Shein";
 import Items from "../_components/Items";
 import Footer from "../_components/Footer";
 import Nav from "../_components/Nav";
+import Cards from "../_components/Cards";
 
 const shop = () => {
   return (
@@ -10,11 +11,11 @@ const shop = () => {
       <Nav />
       <div>
         <Shein />
-
-        <Items home={false} category="Top Picks" />
-        <Items home={false} category="Tops" />
-        <Items home={false} category="Bottoms" />
-        <Items home={false} category="Shoes" />
+        <Cards />
+        <Items home={true} category="Top Picks" />
+        <Items home={true} category="Accessories" />
+        <Items home={true} category="Clothes" />
+        <Items home={true} category="Shoes" />
       </div>
       <Footer />
     </div>

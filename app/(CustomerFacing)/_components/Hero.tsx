@@ -25,8 +25,8 @@ export default function Home() {
         {/* Hero Section */}
         <section className="flex flex-col items-start lg:items-start justify-center h-full text-center lg:text-left lg:px-24 px-6 mt-24">
           <div className="max-w-lg text-white lg:ml-14 ">
-            <h1 className="text-[40px] leading-snug lg:text-6xl font-extrabold text-[#150e66]  lg:text-left text-center">
-              Elevate Your Style with Brikti’s Shopping
+            <h1 className="text-[45px] leading-relaxed lg:text-6xl font-extrabold text-[#150e66]  lg:text-left text-center ">
+              Elevate Your Style with Brukti’s Shopping
             </h1>
             <p className="text-lg mt-6 text-blue-800 leading-relaxed lg:text-left text-center">
               Endless shopping opportunities

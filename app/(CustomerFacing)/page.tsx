@@ -12,8 +12,8 @@ export default function Home() {
         <Shein />
         <Cards />
         <Items home={true} category="Top Picks" />
-        <Items home={true} category="Tops" />
-        <Items home={true} category="Bottoms" />
+        <Items home={true} category="Accessories" />
+        <Items home={true} category="Clothes" />
         <Items home={true} category="Shoes" />
       </div>
       <Footer />
