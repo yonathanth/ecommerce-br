@@ -1,4 +1,5 @@
 import { Nav, NavLink } from "./AdminNav";
+export const dynamic = "force-dynamic";
 
 export default function AdminLayout({
   children,

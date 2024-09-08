@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useCart } from "../../providers/cartContext"; // import your context
 import { formatCurrency } from "@/lib/formatters"; // import formatCurrency
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 interface ItemCardProps {
@@ -29,16 +27,6 @@ const ItemCard: React.FC<ItemCardProps> = ({
   const [quantity, setQuantity] = useState(1);
   const [isDialogOpen, setIsDialogOpen] = useState(false); // Manage Dialog open state
   const { addToCart } = useCart(); // get addToCart from context
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (status !== "loading") {
-      setLoading(false);
-    }
-  }, [status]);
 
   const increaseQuantity = () => setQuantity(quantity + 1);
   const decreaseQuantity = () => {
@@ -48,19 +36,6 @@ const ItemCard: React.FC<ItemCardProps> = ({
   };
 
   const handleAddToCart = () => {
-    if (loading) {
-      return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-purple-100 to-purple-400">
-          <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full text-center">
-            <p className="text-gray-600">Checking session...</p>
-          </div>
-        </div>
-      );
-    }
-    if (!session) {
-      router.push("./login");
-    }
-
     addToCart({
       id,
       name: title,

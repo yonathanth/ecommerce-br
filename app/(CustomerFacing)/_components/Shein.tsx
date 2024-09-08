@@ -1,23 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useCart } from "../../providers/cartContext";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 const ProductInquirySection: React.FC = () => {
   const [productLink, setProductLink] = useState("");
   const [remarks, setRemarks] = useState("");
   const [error, setError] = useState("");
   const { addToCart } = useCart();
-  const { data: session, status } = useSession();
-  const router = useRouter();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (status !== "loading") {
-      setLoading(false);
-    }
-  }, [status]);
 
   const handleScrollToProducts = () => {
     const productsSection = document.getElementById("products-section");
@@ -33,19 +22,6 @@ const ProductInquirySection: React.FC = () => {
   };
 
   const handleAddToCart = () => {
-    if (loading) {
-      return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-purple-100 to-purple-400">
-          <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full text-center">
-            <p className="text-gray-600">Checking session...</p>
-          </div>
-        </div>
-      );
-    }
-    if (!session) {
-      router.push("./login");
-    }
-
     if (!validateInputs()) return;
 
     const newCartItem = {

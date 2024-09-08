@@ -83,7 +83,7 @@ const SignInPage = () => {
         <p className="text-center text-sm text-gray-500">
           Don&apos;t have an account?{" "}
           <a
-            href="/register"
+            href="/auth/register"
             className="font-medium text-purple-600 hover:text-purple-500"
           >
             Register
