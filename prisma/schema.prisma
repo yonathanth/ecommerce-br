@@ -19,6 +19,8 @@ model SheinOrder {
   description      String   @db.VarChar(500)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+    quantity      Int
+
   pricePaidInCents Float // Price represented as a decimal value
   shippingAddress  String // Handles delivery of physical products
   userId           String
@@ -49,12 +51,14 @@ model User {
   hashedPassword String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  role           String     @default("user")
   orders       Order[]
   sheinOrders  SheinOrder[]
 }
 
 model Order {
   id               String   @id @default(uuid())
+  quantity      Int
   pricePaidInCents Float // Price represented as a decimal value
   shippingAddress  String // Handles delivery of physical products
   createdAt        DateTime @default(now())

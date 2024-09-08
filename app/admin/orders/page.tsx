@@ -24,6 +24,7 @@ function getOrders() {
       id: true,
       pricePaidInCents: true,
       shippingAddress: true,
+      quantity: true,
       product: { select: { name: true } },
       user: { select: { phoneNumber: true, firstName: true, lastName: true } },
     },
@@ -36,6 +37,7 @@ function getSheinOrders() {
     select: {
       id: true,
       url: true,
+      quantity: true,
       pricePaidInCents: true,
       shippingAddress: true,
       user: { select: { phoneNumber: true, firstName: true, lastName: true } },
@@ -83,7 +85,7 @@ async function OrdersTable() {
         <TableBody>
           {orders.map((order) => (
             <TableRow key={order.id}>
-              <TableCell>{order.product.name}</TableCell>
+              <TableCell>{`${order.product.name} (${order.quantity})`}</TableCell>
               <TableCell>{`${order.user.firstName} ${order.user.lastName}`}</TableCell>
               <TableCell>{order.user.phoneNumber}</TableCell>
 
@@ -128,15 +130,13 @@ async function OrdersTable() {
           {sheinOrders.map((order) => (
             <TableRow key={order.id}>
               <TableCell>
-                {
-                  <a
-                    href={order.url}
-                    target="_blank"
-                    className="text-blue-500 font-bold"
-                  >
-                    Link
-                  </a>
-                }
+                <a
+                  href={order.url}
+                  target="_blank"
+                  className="text-blue-500 font-bold"
+                >
+                  Link
+                </a>
               </TableCell>
               <TableCell>{`${order.user.firstName} ${order.user.lastName}`}</TableCell>
 
