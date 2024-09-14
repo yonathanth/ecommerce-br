@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useFormStatus } from "react-dom";
+import Link from "next/link"; // Import Link for navigation
 import { addUser } from "./_actions/registerUser";
 
 export function RegistrationForm() {
@@ -26,9 +27,9 @@ export function RegistrationForm() {
           const formData = new FormData(e.target as HTMLFormElement);
           handleSubmit(formData);
         }}
-        className="bg-gradient-to-r from-purple-50 to-blue-50 p-8 rounded-xl shadow-lg space-y-6 max-w-lg w-full"
+        className="bg-white p-8 rounded-xl shadow-lg space-y-6 max-w-lg w-full"
       >
-        <h1 className="text-2xl font-bold text-center text-purple-800 mb-4">
+        <h1 className="text-2xl font-bold text-center text-accentthirty mb-4">
           Register at Brikti&apos;s
         </h1>
 
@@ -61,20 +62,6 @@ export function RegistrationForm() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            type="email"
-            id="email"
-            name="email"
-            required
-            className="rounded-lg border border-purple-300 focus:ring-purple-500 focus:border-purple-500"
-          />
-          {formErrors.email && (
-            <div className="text-red-500">{formErrors.email[0]}</div>
-          )}
-        </div>
-
-        <div className="space-y-2">
           <Label htmlFor="phoneNumber">Phone Number</Label>
           <Input
             type="text"
@@ -88,7 +75,7 @@ export function RegistrationForm() {
           )}
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2 mb-3">
           <Label htmlFor="password">Password</Label>
           <Input
             type="password"
@@ -103,6 +90,19 @@ export function RegistrationForm() {
         </div>
 
         <SubmitButton pending={pending} />
+
+        {/* Add a section for users who already have an account */}
+        <div className="text-center mt-4">
+          <p className="text-sm text-gray-600">
+            Already have an account?{" "}
+            <Link
+              href="/auth/signin"
+              className="text-purple-600 font-semibold hover:underline"
+            >
+              Sign in here
+            </Link>
+          </p>
+        </div>
       </form>
     </div>
   );
@@ -113,7 +113,7 @@ function SubmitButton({ pending }: { pending: boolean }) {
     <Button
       type="submit"
       disabled={pending}
-      className="w-full bg-purple-700 text-white py-2 rounded-lg shadow hover:bg-purple-800 focus:ring-2 focus:ring-purple-600"
+      className="w-full bg-accentthirty text-white mt-4 py-2 rounded-lg shadow hover:bg-thirty focus:ring-2 focus:ring-purple-600"
     >
       {pending ? "Registering..." : "Register"}
     </Button>

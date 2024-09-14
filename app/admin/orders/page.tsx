@@ -36,6 +36,7 @@ function getSheinOrders() {
   return prisma.sheinOrder.findMany({
     select: {
       id: true,
+      description: true,
       url: true,
       quantity: true,
       pricePaidInCents: true,
@@ -72,9 +73,11 @@ async function OrdersTable() {
         <TableHeader>
           <TableRow>
             <TableHead>Product</TableHead>
+
             <TableHead>Customer</TableHead>
             <TableHead>Phone</TableHead>
             <TableHead>Price Paid</TableHead>
+
             <TableHead>Shipping Address</TableHead>
 
             <TableHead className="w-0">
@@ -86,6 +89,7 @@ async function OrdersTable() {
           {orders.map((order) => (
             <TableRow key={order.id}>
               <TableCell>{`${order.product.name} (${order.quantity})`}</TableCell>
+
               <TableCell>{`${order.user.firstName} ${order.user.lastName}`}</TableCell>
               <TableCell>{order.user.phoneNumber}</TableCell>
 
@@ -116,6 +120,8 @@ async function OrdersTable() {
         <TableHeader>
           <TableRow>
             <TableHead>SheinLink</TableHead>
+            <TableHead>Details</TableHead>
+
             <TableHead>Customer</TableHead>
             <TableHead>phone</TableHead>
             <TableHead>Price Paid</TableHead>
@@ -138,6 +144,8 @@ async function OrdersTable() {
                   Link
                 </a>
               </TableCell>
+              <TableCell>{order.description}</TableCell>
+
               <TableCell>{`${order.user.firstName} ${order.user.lastName}`}</TableCell>
 
               <TableCell>{order.user.phoneNumber}</TableCell>

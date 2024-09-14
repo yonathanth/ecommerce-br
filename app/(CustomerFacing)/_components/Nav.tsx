@@ -29,8 +29,8 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children }) => {
   const pathname = usePathname();
   const isActive = pathname === href;
   const className = isActive
-    ? "text-purple-500 dark:text-purple-900 underline-active"
-    : "text-gray-800 dark:text-gray-300 hover:text-purple-900 dark:hover:text-purple-900 transition-colors duration-300";
+    ? "text-accentthirty dark:text-thirty underline-active"
+    : "text-accentthirty dark:text-accentthirty hover:text-thirty dark:hover:text-purple-900 transition-colors duration-300";
 
   return (
     <motion.div
@@ -65,9 +65,7 @@ const Nav: React.FC = () => {
     <>
       <nav
         className={`w-full flex items-center justify-between p-8  ${
-          isHome
-            ? "bg-transparent"
-            : "bg-gradient-to-r from-purple-100 to-purple-200 border"
+          isHome ? "bg-transparent" : "bg-complimentSeventy border"
         }`}
       >
         <Link href="/" className="text-3xl font-bold logo-hover">
@@ -100,7 +98,7 @@ const Nav: React.FC = () => {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="fixed top-0 left-0 w-3/4 h-full bg-white shadow-lg p-6 z-50 md:hidden"
+            className="fixed top-0 left-0 w-2/3 h-full bg-white shadow-lg p-6 z-50 md:hidden"
           >
             <div className="flex flex-col items-start space-y-6">
               <NavLink href="/">Home</NavLink>

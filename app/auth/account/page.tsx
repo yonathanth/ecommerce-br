@@ -19,23 +19,23 @@ const SignInPage = () => {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-purple-100 to-purple-400">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-complimentSeventy to-accentthirty">
         <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full text-center">
-          <p className="text-gray-600">Checking session...</p>
+          <p className="text-accentthirty">Checking session...</p>
         </div>
       </div>
     );
   }
   if (session) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-purple-100 to-purple-400">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-complimentSeventy to-accentthirty">
         <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full text-center">
-          <h1 className="text-2xl font-semibold text-gray-800">
+          <h1 className="text-2xl font-semibold text-accentthirty">
             Welcome back, {session.user?.name || "shopper"}!
           </h1>
-          <p className="mt-4 text-gray-600">You are already signed in.</p>
+          <p className="mt-4 text-accentthirty">You are already signed in.</p>
           <Link href="/shop">
-            <Button className="mt-6 mr-4 bg-purple-600 text-white hover:bg-purple-700 transition duration-300">
+            <Button className="mt-6 mr-4 bg-accentthirty text-white hover:bg-thirty transition duration-300">
               Continue Shopping
             </Button>
           </Link>
@@ -51,22 +51,22 @@ const SignInPage = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-purple-100 to-purple-400">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-complimentSeventy to-accentthirty">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full text-center">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Sign In</h1>
         <p className="text-gray-600 mb-6">
           Please Sign in to continue shopping.
         </p>
         <Link href="/auth/signin">
-          <button className="w-full py-2 px-4 bg-purple-600 text-white font-semibold rounded hover:bg-purple-700 transition duration-300">
-            Sign In with Credentials
+          <button className="w-full py-2 px-4 bg-accentthirty text-white font-semibold rounded hover:bg-thirty transition duration-300">
+            Sign In with Phone Number
           </button>
         </Link>
 
-        <p className="mt-6 text-sm text-gray-500">
-          Don&apos;s have an account?{" "}
+        <p className="mt-6 text-sm text-gray-900">
+          Don&apos;t have an account?{" "}
           <Link
-            className="text-purple-600 hover:underline"
+            className="text-purple-400 font-bold hover:underline"
             href="/auth/register"
           >
             Sign up here

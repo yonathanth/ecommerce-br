@@ -47,12 +47,18 @@ const ItemCard: React.FC<ItemCardProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center bg-white border-purple-200 shadow-lg pb-6 transition-transform transform hover:scale-105 hover:shadow-xl hover:border-purple-700 duration-300 ease-in-out">
+    <div className="flex flex-col items-center bg-gradient-to-tr from-seventy to-thirty   border border-complimentSeventy b shadow-lg pb-6 transition-transform transform hover:scale-105 hover:shadow-xl hover:border-accentthirty duration-300 ease-in-out">
       {/* Fixed parent container for the image */}
       <div className="relative w-full h-48">
-        <Image src={imageSrc} fill alt={title} className="object-cover mb-4" />
+        <Image
+          src={imageSrc}
+          fill
+          alt={title}
+          className="object-cover mb-4"
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+        />
       </div>
-      <h3 className="text-xl font-mono font-semibold text-gray-700 mb-2 text-center">
+      <h3 className="text-xl font-mono font-semibold text-accentthirty mb-2 text-center">
         {title}
       </h3>
       <p className="text-gray-700 mb-4 text-center font-sans ">
@@ -64,7 +70,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
           <Dialog.Trigger asChild>
             <button
               onClick={() => setIsDialogOpen(true)}
-              className="bg-purple-600 text-white py-2 px-4 rounded-sm hover:bg-purple-700 transition duration-200 md:w-48"
+              className="bg-accentthirty text-white py-2 px-4 rounded-sm hover:bg-thirty transition duration-200 md:w-48"
             >
               Add to Cart
             </button>
@@ -72,7 +78,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
           <Dialog.Portal>
             <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
             <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-xl max-w-md w-[90vw] md:w-[60vw] lg:w-[40vw]">
-              <Dialog.Title className="text-2xl font-bold mb-4 text-center text-purple-900">
+              <Dialog.Title className="text-2xl font-bold mb-4 text-center text-accentthirty">
                 {title}
               </Dialog.Title>
               {/* Fixed parent container for the Dialog image */}
@@ -82,25 +88,28 @@ const ItemCard: React.FC<ItemCardProps> = ({
                   fill
                   alt={title}
                   className="object-cover rounded-lg"
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
               </div>
-              <p className="text-gray-700 mb-4 text-center">{description}</p>
-              <p className="text-purple-700 font-semibold mb-4 text-center">
+              <p className="text-accentthirty mb-4 text-center">
+                {description}
+              </p>
+              <p className="text-accentthirty font-semibold mb-4 text-center">
                 {formatCurrency(price)}
               </p>
 
               <div className="text-center mb-4">
-                <p className="text-purple-700 mb-2">
+                <p className="text-accentthirty mb-2">
                   <strong>Available Sizes:</strong>{" "}
                   {availableSizes.length > 0 ? availableSizes : "Not available"}
                 </p>
-                <p className="text-purple-700 mb-4">
+                <p className="text-accentthirty mb-4">
                   <strong>Available Colors:</strong>{" "}
                   {availableColors.length > 0
                     ? availableColors
                     : "Not available"}
                 </p>
-                <p className="text-gray-500 text-sm">
+                <p className="text-accentthirty text-sm">
                   You will receive a call to confirm your preferred size and
                   color.
                 </p>
@@ -109,14 +118,16 @@ const ItemCard: React.FC<ItemCardProps> = ({
               <div className="flex items-center justify-center mb-4">
                 <button
                   onClick={decreaseQuantity}
-                  className="bg-purple-200 text-purple-900 py-2 px-4 rounded-lg hover:bg-purple-300 transition duration-200"
+                  className="bg-thirty text-seventy py-2 px-4 rounded-lg hover:bg-accentthirty transition duration-200"
                 >
                   -
                 </button>
-                <span className="mx-4 text-lg text-purple-900">{quantity}</span>
+                <span className="mx-4 text-xl text-accentthirty">
+                  {quantity}
+                </span>
                 <button
                   onClick={increaseQuantity}
-                  className="bg-purple-200 text-purple-900 py-2 px-4 rounded-lg hover:bg-purple-300 transition duration-200"
+                  className="bg-thirty  text-seventy  py-2 px-4 rounded-lg hover:bg-accentthirty transition duration-200"
                 >
                   +
                 </button>
@@ -124,7 +135,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
 
               <button
                 onClick={handleAddToCart}
-                className="bg-purple-500 text-white py-2 px-4 rounded-lg w-full hover:bg-purple-700 transition duration-200"
+                className="bg-accentthirty  text-white py-2 px-4 rounded-lg w-full hover:bg-thirty transition duration-200"
               >
                 Confirm
               </button>

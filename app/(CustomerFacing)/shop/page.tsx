@@ -7,15 +7,19 @@ import Cards from "../_components/Cards";
 
 const shop = () => {
   return (
-    <div className="bg-gradient-to-br from-purple-50 to-purple-200 min-h-screen">
+    <div className="bg-seventy to-seventy min-h-screen">
       <Nav />
       <div>
         <Shein />
         <Cards />
-        <Items home={true} category="Top Picks" />
-        <Items home={true} category="Accessories" />
-        <Items home={true} category="Clothes" />
-        <Items home={true} category="Shoes" />
+        <Items home={false} category="Top Picks" />
+        <Items home={false} category="Accessories" />
+        <Items home={false} category="Clothes" />
+        <Items home={false} category="Shoes" />
+        <Items home={false} category="Tops" />
+        <Items home={false} category="Cosomos" />
+        <Items home={false} category="Bags" />
+        <Items home={false} category="Othes" />
       </div>
       <Footer />
     </div>

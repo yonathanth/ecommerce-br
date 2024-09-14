@@ -2,7 +2,8 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-200 py-6 px-8 mt-24">
+    <footer className="bg-gradient-to-b  from-thirty to-accentthirty  text-gray-200 py-6 px-8 mt-24">
+      <div className="h-40"></div>
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
         {/* Logo and Description */}
         <div className="text-center md:text-left">
@@ -14,13 +15,13 @@ const Footer = () => {
 
         {/* Social Media Links */}
         <div className="flex space-x-6">
-          <a href="#" className="hover:text-yellow-500">
+          <a href="#" className="hover:text-complimentSeventy">
             <FaFacebook size={20} />
           </a>
-          <a href="#" className="hover:text-yellow-500">
+          <a href="#" className="hover:text-complimentSeventy">
             <FaInstagram size={20} />
           </a>
-          <a href="#" className="hover:text-yellow-500">
+          <a href="#" className="hover:text-complimentSeventy">
             <FaTwitter size={20} />
           </a>
         </div>

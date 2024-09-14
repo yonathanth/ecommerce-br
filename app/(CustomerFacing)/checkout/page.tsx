@@ -29,7 +29,13 @@ const CheckoutPage: React.FC = () => {
 
   // Prevent flashing before session is loaded
   if (status === "loading") {
-    return <div>Loading...</div>; // Loading state while session is fetched
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-complimentSeventy to-accentthirty">
+        <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full text-center">
+          <p className="text-accentthirty">Checking session...</p>
+        </div>
+      </div>
+    ); // Loading state while session is fetched
   }
 
   const totalAmount = cartItems.reduce(
@@ -87,9 +93,9 @@ const CheckoutPage: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
-      <div className="w-full max-w-3xl p-8 bg-white rounded-lg shadow-md space-y-6">
-        <h2 className="text-3xl font-bold text-center text-purple-600">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-complimentSeventy to-accentthirty border border-accentthirty">
+      <div className="w-full max-w-3xl p-8 bg-white rounded-lg shadow-md space-y-6 border border-thirty">
+        <h2 className="text-3xl font-bold text-center text-accentthirty">
           Checkout
         </h2>
 
@@ -154,10 +160,10 @@ const CheckoutPage: React.FC = () => {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-purple-600">
+            <h3 className="text-lg font-semibold text-accentthirty">
               Payment Instructions
             </h3>
-            <div className="p-4 bg-purple-50 rounded-md border border-purple-300 shadow-sm">
+            <div className="p-4 bg-seventy rounded-md border border-accentthirty shadow-sm">
               <p className="text-sm text-gray-800 font-medium">
                 {`Please transfer 50% of the total amount --- ETB ${
                   totalAmount / 2
@@ -184,7 +190,7 @@ const CheckoutPage: React.FC = () => {
 
           <button
             type="submit"
-            className={`w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 ${
+            className={`w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-thirty hover:bg-accentthirty focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 ${
               isSubmitting ? "opacity-50" : ""
             }`}
             disabled={isSubmitting}

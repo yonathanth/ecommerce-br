@@ -47,14 +47,16 @@ const Items: React.FC<CategoryProps> = async ({ category, home }) => {
     <div className="pt-20 px-4" id={category}>
       <div className="px-4">
         <div className="flex justify-between px-3">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-8">
+          <h3 className="text-2xl font-semibold text-accentthirty mb-8">
             {category}
           </h3>
           {home && (
             <Link href={`/shop#${category}`}>
-              <button className="text-2xl font-semibold text-gray-800 mb-8">
-                See all
-              </button>
+              {home && (
+                <button className="text-2xl font-semibold text-gray-800 mb-8">
+                  See all
+                </button>
+              )}
             </Link>
           )}
         </div>

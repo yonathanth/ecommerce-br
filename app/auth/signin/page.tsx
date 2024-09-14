@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 
 const SignInPage = () => {
-  const [email, setEmail] = useState("");
+  const [phoneNumber, setNumber] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
@@ -18,22 +18,22 @@ const SignInPage = () => {
 
     const result = await signIn("credentials", {
       redirect: false,
-      email,
+      phoneNumber,
       password,
       callbackUrl,
     });
 
     if (result?.error) {
-      setError("Invalid email or password.");
+      setError("Invalid Number or password.");
     } else {
       router.push(callbackUrl); // Redirect back to the previous page
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-br from-purple-50 to-purple-500 min-h-screen">
+    <div className="flex justify-center items-center h-screen bg-gradient-to-br from-seventy  to-accentthirty min-h-screen">
       <div className="w-full max-w-md p-8 space-y-4 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center text-purple-600">
+        <h2 className="text-2xl font-bold text-center text-accentthirty">
           Sign in
         </h2>
         {error && <p className="text-red-600 text-center">{error}</p>}
@@ -41,17 +41,17 @@ const SignInPage = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label
-              htmlFor="email"
+              htmlFor="number"
               className="block text-sm font-medium text-gray-700"
             >
-              Email
+              Phone Number
             </label>
             <input
-              type="email"
-              id="email"
+              type="text"
+              id="number"
               className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={phoneNumber}
+              onChange={(e) => setNumber(e.target.value)}
               required
             />
           </div>
@@ -74,7 +74,7 @@ const SignInPage = () => {
 
           <button
             type="submit"
-            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-accentthirty hover:bg-thirty focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
           >
             Sign in
           </button>
