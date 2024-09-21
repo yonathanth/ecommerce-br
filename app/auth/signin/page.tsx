@@ -17,16 +17,28 @@ const SignInPage = () => {
     e.preventDefault();
 
     const result = await signIn("credentials", {
-      redirect: false,
+      redirect: false, // No immediate redirect
       phoneNumber,
       password,
       callbackUrl,
     });
 
     if (result?.error) {
-      setError("Invalid Number or password.");
+      setError("Invalid phone number or password.");
     } else {
-      router.push(callbackUrl); // Redirect back to the previous page
+      // Fetch the session data after successful login
+      const session = await fetch("/api/auth/session").then((res) =>
+        res.json()
+      );
+
+      // Check the user's role in the session data
+      if (session?.user?.role === "admin") {
+        // Redirect admins directly to /admin
+        router.push("/admin");
+      } else {
+        // Otherwise, redirect to the previous page (callbackUrl)
+        router.push(callbackUrl);
+      }
     }
   };
 

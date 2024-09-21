@@ -7,7 +7,7 @@ const categories = [
   { title: "Jackets", imageSrc: "/1.png" },
   { title: "Tops", imageSrc: "/1.png" },
   { title: "Shoes", imageSrc: "/1.png" },
-  { title: "Comsmos", imageSrc: "/1.png" },
+  { title: "Cosmotics", imageSrc: "/1.png" },
   { title: "Accessories", imageSrc: "/1.png" },
 
   { title: "Others", imageSrc: "/1.png" },
